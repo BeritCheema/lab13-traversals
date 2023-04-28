@@ -125,7 +125,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		{
 			return;
 		}
-		
 		System.out.println(node.data + " ");
 		inOrderRecurse(node.leftChild);
 		inOrderRecurse(node.rightChild);
@@ -134,10 +133,27 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	
 	//Traverse the tree in an preorder fashion but using a stack
 	//Print the current node first and then recurse on the children
-	public void preOrderStack() {
+	public void preOrderStack() 
+	{
+		Stack<BSTNode<T>> in = new Stack<BSTNode<T>>();
+		System.out.println("Pre Order Stack Test");
+	     in.push(root);
+
+	        while (!in.empty()) 
+	        {
+	        	BSTNode<T> node = in.pop();
+	            System.out.print(node.data + " ");
+
+	            if (node.rightChild != null) {
+	                in.push(node.rightChild);
+	            }
+
+	            if (node.leftChild != null)
+	            {
+	                in.push(node.leftChild);
+	            }
+	        }
 		
-		Stack<BSTNode<T>> pre = new Stack<BSTNode<T>>();
-		System.out.println(" Preorder test commit");
 	}
 		
 
@@ -146,7 +162,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	//then recursively print the right side of current node
 	//For a bst this will print the values in sorted order from smallest to largest
 	public void inOrder() {
-		inOrderRecurse(root); 
+		inOrderRecurse(root);
+		
 	}
 	
 	public void inOrderRecurse(BSTNode<T> node) 
@@ -163,8 +180,27 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	//Traverse the tree in an inorder fashion but using a stack
 	public void inOrderStack() {
 		Stack<BSTNode<T>> in = new Stack<BSTNode<T>>();
-		System.out.println("InOrder test commit");
+		System.out.println("InOrder Stack test commit");
 		
+		BSTNode<T> current = root;
+		
+		while(current != null || !in.empty())
+		{
+			while(current != null)
+			{
+				in.push(current);
+				current = current.leftChild;
+			}
+			
+			current = in.pop();
+			
+			System.out.println(current + " ");
+			
+			current = current.rightChild;
+			
+		}
+		
+	
 		
 	}
 	
